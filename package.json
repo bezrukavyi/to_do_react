@@ -5,7 +5,12 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.10"
+    "prop-types": "^15.5.10",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.7.0",
+    "bootstrap-sass": "^3.3.7"
   },
   "devDependencies": {
     "node-sass-chokidar": "0.0.3",
@@ -13,8 +18,8 @@
     "react-scripts": "1.0.7"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "build-css": "node-sass-chokidar src/ -o src/styles/dist/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/styles/dist/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "PORT=3001 npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",

@@ -1,0 +1,41 @@
+$app-colors: (
+  'white'           : white,
+  'black'           : black,
+  grey-100          : #f7f8f4,
+  grey-150          : #f3f3f3,
+  grey-200          : #ebebeb,
+  grey-250          : #d7d7d7,
+  grey-300          : #ccc,
+  grey-400          : #a1a1a1,
+  grey-500          : #929292,
+  grey-700          : #747171,
+  black-200         : #504d63,
+  black-300         : #363647,
+  black-400         : #38354a,
+  black-800         : #1b1b20,
+  light-blue-300    : #cad7f2,
+  blue-300          : #58dbdf,
+  blue-700          : #0068ff,
+  blue-900          : #4139c8,
+  purple-700        : #7a44a0,
+  red-600           : #de1273,
+  green-300         : #00d4ea,
+  green-400         : #03cae0,
+  light-green-500   : #6bfb6b,
+  light-green-600   : #74e274,
+  orange-400        : #faab1f,
+  orange-900        : #ff4031
+);
+
+@each $color in $app-colors {
+  .in-#{nth($color, 1)} {
+    color: nth($color, 2) !important;
+  }
+  .bg-#{nth($color, 1)} {
+    background-color: nth($color, 2) !important;
+  }
+}
+
+@function color($color) {
+  @return map-get($app-colors, $color)
+}
