@@ -1,22 +1,30 @@
-import React, { Component } from 'react'
-import logo from './logo.svg'
+import React from 'react'
+import { Provider } from 'react-redux'
+import { Router, Route, Switch } from 'react-router'
+import ReduxToastr from 'react-redux-toastr'
+
+import * as path from 'constants/path'
+import AuthRoute from 'routes/AuthRoute'
 import { Layout } from 'components'
-import 'styles/dist/styles/App.css'
+import { SignUpFormContainer as SignUp, SignInFormContainer as SignIn } from 'containers/auth'
+import { Projects } from 'components/projects'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+const App = ({ store, history, ...props }) =>
+  <Layout>
+    <Provider store={store}>
+      <div>
+        <Router history={history}>
+          <Switch>
+            <Route exact path={path.ROOT_PATH} component={SignIn} />
+            <Route path={path.SIGN_UP_PATH} component={SignUp} />
+            <AuthRoute path={path.PROJECTS_PATH} component={Projects} />
+          </Switch>
+        </Router>
+
+        <ReduxToastr />
       </div>
-    );
-  }
-}
+    </Provider>
+  </Layout>
 
-export default App;
+
+export default App
