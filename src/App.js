@@ -1,12 +1,12 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { Router, Route, Switch } from 'react-router'
+import { Router, Route, Switch, Redirect } from 'react-router'
 import ReduxToastr from 'react-redux-toastr'
 
 import * as path from 'constants/path'
 import AuthRoute from 'routes/AuthRoute'
-import { Layout } from 'components'
-import { SignUpFormContainer as SignUp, SignInFormContainer as SignIn } from 'containers/auth'
+import { Layout, PageNotFound } from 'components'
+import { SignIn, SignUp } from 'components/auth'
 import { Projects } from 'components/projects'
 
 const App = ({ store, history, ...props }) =>
@@ -15,9 +15,11 @@ const App = ({ store, history, ...props }) =>
       <div>
         <Router history={history}>
           <Switch>
-            <Route exact path={path.ROOT_PATH} component={SignIn} />
-            <Route path={path.SIGN_UP_PATH} component={SignUp} />
-            <AuthRoute path={path.PROJECTS_PATH} component={Projects} />
+            <AuthRoute path={path.ROOT} component={SignIn} accessForAuthed={false} exact />
+            <AuthRoute path={path.SIGN_UP} component={SignUp} accessForAuthed={false} exact />
+            <AuthRoute path={path.PROJECTS} component={Projects} />
+            <Route path={path.NOT_FOUND_404} component={PageNotFound} />
+            <Redirect to={path.NOT_FOUND_404} />
           </Switch>
         </Router>
 

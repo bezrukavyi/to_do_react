@@ -7,9 +7,6 @@ const user = (state = null, { type, data }) => {
     case SIGN_IN + SUCCESS: {
       return {...state, ...data}
     }
-    case VALIDATE_TOKEN + FAILURE: {
-      return null
-    }
     default:
       return state
   }

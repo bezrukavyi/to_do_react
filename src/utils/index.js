@@ -28,4 +28,21 @@ export const formError = (reject) => {
   if (reject['form']) {
     throw new SubmissionError(response_error(reject['form']))
   }
+
+  if (reject['general']) {
+    messageError(reject['general'])
+  }
+}
+
+export const url_param = (name, remove) => {
+  const url = new URL(window.location.href)
+  let value = url.searchParams.get(name)
+
+
+  if (remove) {
+    const new_url = window.location.href.replace(`${name}=${encodeURIComponent(value)}`, '')
+    window.history.pushState(null, null, new_url.replace(/\?$/, ''))
+  }
+
+  return value
 }

@@ -5,6 +5,7 @@ import { reducer as toastrReducer } from 'react-redux-toastr'
 
 import headers from './headers'
 import user from './user'
+import entities from './entities'
 
 export default combineReducers({
   form: formReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   toastr: toastrReducer,
   headers,
   user,
+  entities,
 })
