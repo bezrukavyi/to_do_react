@@ -8,7 +8,7 @@ import { SignInForm } from 'components/auth'
 const signIn = (dispatch, ownProps, values) => {
   return dispatch(signInAction({auth: values}))
   .then((response) => messageSuccess('Success sign in'))
-  .catch((reject) => formError({ form: reject }))
+  .catch((reject) => formError({ general: reject }))
 }
 
 const mapStateToProps = (state) => ({

@@ -4,24 +4,39 @@ import { Route } from 'react-router'
 import { store, history } from 'store'
 import { messageError } from 'utils'
 import { validateToken } from 'actions/auth'
-import { SIGN_IN_PATH } from 'constants/path'
+import * as appPath from 'constants/path'
 import { Layout, Preloader } from 'components'
 
-const AuthRoute = ({ path, component: Component, ...rest }) => {
-  if (!store.getState().user) {
+const redirectForAuthed = () => {
+  history.push(appPath.PROJECTS)
+  messageError('You already authed')
+}
+
+const AuthRoute = ({ match, path, component: Component, accessForAuthed = true, ...rest }) => {
+  let user = store.getState().user
+
+  if (user && !accessForAuthed) {
+    redirectForAuthed()
+  }
+
+  if (!user) {
     store.dispatch(validateToken())
-    .then(response => history.push(path))
+    .then(response => {
+      accessForAuthed ? history.push(match) : redirectForAuthed()
+    })
     .catch(reject => {
-      history.push(SIGN_IN_PATH)
-      messageError(reject)
+      if (accessForAuthed) {
+        history.push(appPath.ROOT)
+        messageError(reject)
+      }
     })
   }
 
   return (
     <Route {...rest} render={props => (
-      store.getState().user
+      user
       ? <Component { ...props} />
-      : <Preloader />
+      : accessForAuthed ? <Preloader /> : <Component { ...props} />
     )}/>
   )
 }
