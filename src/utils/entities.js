@@ -1,85 +1,49 @@
-import normalize from 'json-api-normalizer';
-import { transform, pickBy, keys, forIn, filter } from 'lodash'
+import { normalize } from 'normalize-json-api'
+import { transform, pickBy, keys, forIn, filter, uniq } from 'lodash'
 import dotProp from 'dot-prop-immutable'
 
-const dataFetch = (data, attribute) => data[attribute] || data.data[attribute]
-
-const sliceEnity = (entities, entity) => {
-  pickBy(entities, (_entity, id) => id == entity.id)
+const initialState = {
+  byId: [],
+  allIds: [],
 }
 
-const normalize_entities = (state, data) => {
-  return transform(normalize(data), (result, entities, name) => {
-    const state_entites = state[name] || {}
+const transformEntities = (state, data, callback) => {
+  const normalizedData = normalize(data)
+  return transform(normalizedData.entities, (result, entities, name) => {
+    return result[name] = callback(state, entities, name)
+  }, {})
+}
 
-    return result[name] = {
-      byId: { ...state_entites.byId, ...entities },
-      allIds: { ...state_entites.allIds, ...keys(entities) },
-      choosedId: null,
+const updateEntities = (state, entities, name) => {
+  const stateEntities = state[name] || initialState
+
+  return {
+    ...stateEntities,
+    byId: {...stateEntities.byId, ...updateGroupEntities(state, entities) },
+    allIds: uniq([ ...stateEntities.allIds, ...keys(entities) ])
+  }
+}
+
+const updateGroupEntities = (state, entities) => {
+  return transform(entities, (result, entity, id) => {
+    return result[id] = {
+      ...dotProp.get(state, `${entity.type}.'byId'.${id}`),
+      ...entity
     }
   }, {})
 }
 
-const update_entities = (state, data) => {
-  return transform(normalize(data), (result, entities, name) => {
-    const state_entites = state[name] || {}
-    const entity = entities[dataFetch(data, 'id')]
-
-    return result[name] = {
-      ...state[name],
-      byId: {
-        ...state_entites.byId,
-        [entity.id]: {
-          ...dotProp.get(state, `${name}.byId.${entity.id}`),
-          ...entity
-        }
-      }
-    }
-  }, {})
-}
-
-export const getList = (state, data) => {
-  return { ...state, ...normalize_entities(state, data) }
-}
-
-export const create = (state, data) => {
-  const entities = state[dataFetch(data, 'type')] || {}
+const sliceEnities = (state, entities, name) => {
+  const stateEntities = state[name] || initialState
 
   return {
-    ...state,
-    [dataFetch(data, 'type')]: {
-      ...entities,
-      byId: { ...entities.byId, ...normalize(data) },
-      allIds: entities.allIds.push(dataFetch(data, 'id')),
-      choosedId: dataFetch(data, 'id'),
-    }
+    ...stateEntities,
+    byId: pickBy(stateEntities.byId, ({ id }) => !keys(entities).includes(id)),
+    allIds: uniq(filter(stateEntities.allIds, (id) => !keys(entities).includes(id))),
   }
 }
 
-export const get = (state, data) => ({
-  ...state,
-  ...update_entities(state, data)
-})
-
-export const update = (state, data) => get(state, data)
-
-export const destroy = (state, data) => {
-  const entities = state[dataFetch(data, 'type')] || {}
-
-  return {
-    ...state,
-    [dataFetch(data, 'type')]: {
-      ...entities,
-      byId: { ...entities.byId, ...sliceEnity(entities, data) },
-      allIds: filter(entities.allIds, (id) => id != dataFetch(data, 'id')),
-    }
-  }
-}
-
-export const choose = (state, data) => ({
-  ...state,
-  [dataFetch(data, 'type')]: {
-    ...state[dataFetch(data, 'type')],
-    choosedId: dataFetch(data, 'id'),
-  }
-})
+export const get = (state, data) => transformEntities(state, data, updateEntities)
+export const update = (state, data) => transformEntities(state, data, updateEntities)
+export const create = (state, data) => transformEntities(state, data, updateEntities)
+export const destroy = (state, data) => transformEntities(state, data, sliceEnities)

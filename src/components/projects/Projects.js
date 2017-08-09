@@ -10,15 +10,14 @@ import {
 } from 'containers/projects'
 import * as path from 'constants/path'
 
-const Projects = () =>
+const Projects = ({ match }) =>
   <div>
     <h1>Projects</h1>
     <ProjectsNav />
 
     <Switch>
       <Route path={path.PROJECT_CREATE} component={ProjectForm} exact />
-      <Route path={path.PROJECT()} component={Project} exact />
-      <Route path={path.EDIT_PROJECT()} component={ProjectForm} exact />
+      <Route path={path.PROJECT()} component={Project} />
     </Switch>
   </div>
 
