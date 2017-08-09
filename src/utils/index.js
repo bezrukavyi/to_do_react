@@ -30,7 +30,7 @@ export const formError = (reject) => {
   }
 
   if (reject['general']) {
-    messageError(reject['general'])
+    return messageError(reject['general'])
   }
 }
 
