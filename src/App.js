@@ -1,32 +1,24 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { Router, Route, Switch, Redirect } from 'react-router'
-import ReduxToastr from 'react-redux-toastr'
+import { Router, Route, IndexRoute, Switch } from 'react-router'
+import { ConnectedRouter } from 'react-router-redux'
 
-import * as path from 'constants/path'
-import AuthRoute from 'routes/AuthRoute'
-import { Layout, PageNotFound } from 'components'
-import { SignIn, SignUp } from 'components/auth'
-import { Projects } from 'components/projects'
+import { AuthRoute, UnAuthRoute } from 'routes'
+import Layouts from 'components/Layouts'
+import Pages from 'components/Pages'
+import * as path from 'routes/path'
 
-const App = ({ store, history, ...props }) =>
-  <Layout>
-    <Provider store={store}>
-      <div>
-        <Router history={history}>
-          <Switch>
-            <AuthRoute path={path.ROOT} component={SignIn} accessForAuthed={false} exact />
-            <AuthRoute path={path.SIGN_UP} component={SignUp} accessForAuthed={false} exact />
-            <AuthRoute path={path.PROJECTS} component={Projects} />
-            <Route path={path.NOT_FOUND_404} component={PageNotFound} />
-            <Redirect to={path.NOT_FOUND_404} />
-          </Switch>
-        </Router>
+export default ({ store, history }) =>
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Layouts.Base>
+        <Switch>
+          <UnAuthRoute path={path.ROOT} component={Pages.SignIn} exact />
+          <UnAuthRoute path={path.SIGN_UP} component={Pages.SignUp} exact />
+          <AuthRoute path={path.AUTHED} component={() => <h1>Authed</h1>} exact />
 
-        <ReduxToastr />
-      </div>
-    </Provider>
-  </Layout>
-
-
-export default App
+          <Route component={() => <h1>404</h1>} />
+        </Switch>
+      </Layouts.Base>
+    </ConnectedRouter>
+  </Provider>

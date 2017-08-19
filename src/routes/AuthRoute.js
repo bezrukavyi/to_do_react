@@ -1,42 +1,25 @@
 import React from 'react'
 import { Route } from 'react-router'
+import { replace } from 'react-router-redux'
 
-import { store, history } from 'store'
-import { messageError } from 'utils'
-import { validateToken } from 'actions/auth'
-import * as appPath from 'constants/path'
-import { Layout, Preloader } from 'components'
+import { store } from 'store'
+import User from 'store/User'
+import * as appPath from './path'
+import { Preloader } from 'components'
+import Layouts from 'components/Layouts'
 
-const redirectForAuthed = () => {
-  history.push(appPath.PROJECTS)
-  messageError('You already authed')
-}
-
-const AuthRoute = ({ match, path, component: Component, accessForAuthed = true, ...rest }) => {
-  let user = store.getState().user
-
-  if (user && !accessForAuthed) {
-    redirectForAuthed()
-  }
+const AuthRoute = ({ layout, match, path, component: Component, ...rest }) => {
+  const user = User.selectors.entity()
 
   if (!user) {
-    store.dispatch(validateToken())
-    .then(response => {
-      accessForAuthed ? history.push(match) : redirectForAuthed()
-    })
-    .catch(reject => {
-      if (accessForAuthed) {
-        history.push(appPath.ROOT)
-        messageError(reject)
-      }
-    })
+    store.dispatch(User.actions.validateToken())
+    .then(response => store.dispatch(replace(match)))
+    .catch(reject => store.dispatch(replace(appPath.ROOT)))
   }
 
   return (
     <Route {...rest} render={props => (
-      user
-      ? <Component { ...props} />
-      : accessForAuthed ? <Preloader /> : <Component { ...props} />
+      user ? <Layouts.Auth><Component { ...props} /></Layouts.Auth> : <Preloader />
     )}/>
   )
 }
