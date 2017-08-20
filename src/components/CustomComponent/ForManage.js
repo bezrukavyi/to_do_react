@@ -14,6 +14,7 @@ class ForManage extends Component {
     this.toggleRemove = this.toggleRemove.bind(this)
     this.confirmRemove = this.confirmRemove.bind(this)
     this.confirmEdit = this.confirmEdit.bind(this)
+    if(isFunction(this.inititalize)) { this.inititalize(props) }
   }
 
   toggleTools(values) {
@@ -33,12 +34,12 @@ class ForManage extends Component {
 
   confirmRemove(values) {
     this.setState({ removeTools: false })
-    if(isFunction(this.props.onRemove)) { this.props.onRemove(values) }
+    if(isFunction(this.props.onConfirmRemove)) { this.props.onConfirmRemove(values) }
   }
 
   confirmEdit(values) {
     this.setState({ editTools: false })
-    if(isFunction(this.props.onEdit)) { this.props.onEdit(values) }
+    if(isFunction(this.props.onConfirmEdit)) { this.props.onConfirmEdit(values) }
   }
 }
 

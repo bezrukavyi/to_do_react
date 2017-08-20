@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { reduxForm, reset } from 'redux-form'
+import { isFunction } from 'lodash'
 
 import { formAdapter } from 'utils'
 import Task from 'store/Entities/Task'
@@ -15,11 +16,16 @@ const mapDispatchToProps = {
   reset
 }
 
+const onSuccess = (dispatchProps, stateProps, ownProps) => {
+  if(isFunction(ownProps.onSuccess)) { ownProps.onSuccess() }
+  return dispatchProps.reset(stateProps.form)
+}
+
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  onSubmit: formAdapter((data) => dispatchProps.create(data, ownProps.projectId).then(() => dispatchProps.reset(stateProps.form)))
+  onSubmit: formAdapter((data) => dispatchProps.create(data, ownProps.projectId).then(() => onSuccess(dispatchProps, stateProps, ownProps)))
 })
 
 const reduxCreate = reduxForm({})(Create)

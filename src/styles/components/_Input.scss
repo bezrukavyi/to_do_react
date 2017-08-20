@@ -8,41 +8,21 @@
   background: transparent;
   color: color(black-100);
   transition: map-get($transition, cubic);
+  outline: none;
+  box-shadow: none;
 
   &::placeholder {
     color: color(black-200);
   }
 
-  &.black__theme {
-    color: color(black-100);
-
-    &:focus {
-      border-color: color(black-100);
-
-      &::placeholder {
-        color: color(black-100);
-      }
-    }
-  }
-
-  &.blue__theme {
-    @include input-focus-theme(blue-100);
-  }
-
-  &.orange__theme {
-    @include input-focus-theme(orange-100);
-  }
-
-  &.purple__theme {
-    @include input-focus-theme(purple-100);
-  }
-
-  &.yellow__theme {
-    @include input-focus-theme(yellow-100);
-  }
-
   &:focus {
+    outline: none;
     box-shadow: none;
+    border-color: color(black-100);
+
+    &::placeholder {
+      color: color(black-100);
+    }
   }
 
   &.error__theme {

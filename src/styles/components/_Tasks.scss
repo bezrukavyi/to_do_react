@@ -1,0 +1,16 @@
+.task__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.task__tools {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.task__create-form {
+  flex: 1;
+}
+.task__title--checked {
+  text-decoration: line-through;
+}

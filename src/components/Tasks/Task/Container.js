@@ -10,13 +10,15 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   remove: Task.actions.destroy,
+  update: Task.actions.update,
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  onConfirmRemove: () => dispatchProps.remove(ownProps.id)
+  onConfirmRemove: () => dispatchProps.remove(ownProps.id),
+  check: () => dispatchProps.update(ownProps.id, { checked: !stateProps.checked }),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(TaskItem)

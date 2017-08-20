@@ -7,7 +7,7 @@ const Edit = ({ handleSubmit, error, submitting }) =>
     <div className='project__field'>
       <Fields.Input name='title' type='text' placeholder='title' />
 
-      <Buttons.Form type='submit' loading={submitting} text='Update project' />
+      <Buttons.Form type='submit' loading={submitting} className='project__nav-button' text='Save project' />
     </div>
   </form>
 

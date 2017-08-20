@@ -8,11 +8,10 @@ const List = (props) => {
 
   return (
     <div>
+      <Create />
       <div className='projects__list-wrap'>
         { projectsIds.map((id) => <Project key={id} id={id} />) }
       </div>
-
-      <Create />
     </div>
   )
 }
