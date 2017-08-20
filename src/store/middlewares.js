@@ -5,7 +5,7 @@ import thunk from 'redux-thunk'
 
 const isDev = process.env.NODE_ENV === 'development'
 
-const configureMiddlewares = ({ history }) => {
+const configureMiddlewares = (history) => {
   const routerMiddleware = createRouterMiddleware(history)
 
   const loggerMiddleware = createLoggerMiddleware({

@@ -1,0 +1,5 @@
+export const TASK_CREATE = 'TASK_CREATE'
+export const TASK_LIST = 'TASK_LIST'
+export const TASK_GET = 'TASK_GET'
+export const TASK_UPDATE = 'TASK_UPDATE'
+export const TASK_DESTROY = 'TASK_DESTROY'

@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { history, store } from 'store'
+import { store, history } from 'store'
+import User from 'store/User'
 import App from 'App'
-import registerServiceWorker from 'registerServiceWorker'
 
 import 'styles/dist/styles/App.css'
+
+User.actions.checkAuthCredentials()
 
 ReactDOM.render(
   <App
@@ -16,4 +18,4 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-registerServiceWorker()
+require('registerServiceWorker').default()

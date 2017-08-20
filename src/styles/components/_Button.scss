@@ -1,0 +1,61 @@
+button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  outline: none;
+  box-shadow: none;
+  cursor: default;
+}
+
+.btn {
+  padding: 8px 12px;
+  margin: 0;
+  font-size: 14px;
+  border-width: map-get($border, light);
+  background: transparent;
+  color: color(black-200);
+  border-color: color(black-200);
+  border-radius: 4px;
+  transition: map-get($transition, cubic);
+  color: color(black-200);
+  border-color: color(black-200);
+  box-shadow: none;
+  outline: none !important;
+
+  &:hover {
+    background: transparent;
+    color: color(black-100);
+    border-color: color(black-100);
+  }
+
+  &:focus {
+    color: color(black-200);
+    border-color: color(black-100);
+  }
+
+  &:active {
+    color: color(black-200);
+    border-color: color(black-100);
+  }
+}
+
+.ladda-button {
+  @extend .btn;
+}
+
+.ladda-label {
+  transition: none !important;
+}
+
+.btn-hint {
+  color: color(black-200);
+  background: color(white-100) !important;
+  padding: 0;
+  border: 0;
+  text-decoration: underline;
+  margin-top: -1px;
+  padding-left: 0;
+  padding-right: 0;
+  width: 115%;
+  width: auto;
+}
