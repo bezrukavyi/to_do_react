@@ -45,9 +45,12 @@ export const signup = (data) => (dispatch) =>
 export const validateToken = () => {
   return Api.get('auth/validate_token', VALIDATE_TOKEN, {})
 }
+
+export const removeAccessHeaders = () => storage.remove('authData')
+
 export const signout = () => (dispatch) => {
   Promise.resolve(dispatch({type: USER_SIGNOUT})).then(response => {
     storage.remove('authData')
-    return dispatch(replace(path.AUTHED))
+    return dispatch(replace(path.ROOT))
   })
 }

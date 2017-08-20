@@ -14,7 +14,6 @@ const extractLifeCycleProps = pick([
   'componentWillUnmount',
 ])
 
-
 const injectToComponent = (Component, ...props) => {
   return React.createClass({
     render() { return <Component { ...this.props } { ...this.state } /> },

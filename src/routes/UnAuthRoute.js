@@ -13,8 +13,11 @@ const UnAuthRoute = ({ layout, match, path, component: Component, ...rest }) => 
 
   if (accessHeaders) {
     store.dispatch(User.actions.validateToken())
-    .then(response => store.dispatch(replace(appPath.AUTHED)))
-    .catch(reject => store.dispatch(replace(match)))
+    .then(response => store.dispatch(replace(appPath.DASHBOARD)))
+    .catch(reject => {
+      User.actions.removeAccessHeaders()
+      store.dispatch(replace(match))
+    })
   }
 
   return (

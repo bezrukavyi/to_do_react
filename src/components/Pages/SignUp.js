@@ -2,8 +2,8 @@ import React from 'react'
 
 import User from 'components/User'
 
-const SignUp = ({ children }) =>
-  <div className='main-container'>
+const SignUp = () =>
+  <div>
     <User.SignUpForm />
   </div>
 

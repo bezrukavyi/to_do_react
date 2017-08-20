@@ -10,7 +10,7 @@ import { formAdapter } from 'utils'
 
 const mapDispatchToProps = {
   signup,
-  onSuccess: () => replace(path.AUTHED)
+  onSuccess: () => replace(path.DASHBOARD)
 }
 
 const mergeProps = (_, dispatchProps, ownProps) => ({

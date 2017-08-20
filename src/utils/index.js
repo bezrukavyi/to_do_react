@@ -72,4 +72,4 @@ export const deepTransformKeys = curry((f, value) => cond([
 export const camelCaseKeys = (object) => deepTransformKeys(camelCase, object)
 export const snakeCaseKeys = (object) => deepTransformKeys(snakeCase, object)
 
-export { cond, isObject, snakeCase, pipe, fromPairs, isArray, T, identity, props, pick, reduce, uniq, always, camelCase, chain, transform, pickBy, isEmpty, isNil };
+export { cond, isObject, snakeCase, pipe, fromPairs, isArray, T, identity, props, pick, reduce, uniq, always, camelCase, chain, transform, pickBy, isEmpty, isNil }
