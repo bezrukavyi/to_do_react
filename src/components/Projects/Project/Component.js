@@ -22,44 +22,50 @@ class Project extends CustomComponent.ForManage {
 
     return (
       <div className='project-wrap'>
-        <div className='project__nav'>
-          <div className='project__nav-title'>
-            <h3>{ title }</h3>
+        { !editTools &&
+          <div className='project__nav'>
+            <div className='project__nav-title'>
+              <h3>{ title }</h3>
+            </div>
+            <div className='project__nav-tools'>
+              <button onClick={toggleTools} className='entity__nav-button'>Setting</button>
+            </div>
           </div>
-          <div className='project__nav-tools'>
-            <button onClick={toggleTools} className='project__nav-button'>Setting</button>
+        }
+
+        { editTools &&
+          <div className='project__nav'>
+            <div className='project__nav-title'>
+              <Edit id={id} onSuccess={confirmEdit} />
+            </div>
+            <div className='project__nav-tools'>
+              <button onClick={toggleEdit} className='entity__nav-button'>Close</button>
+            </div>
           </div>
-        </div>
+        }
 
         <div className='project__content'>
           <div className={classnames('project__tools-wrap', {'project__tools-wrap--active': isActiveTools})}>
-            { isActiveTools && !editTools && !removeTools && !addTaskTools &&
+            { isActiveTools && !removeTools && !addTaskTools &&
               <div className='project__tools'>
-                <button onClick={toggleAddTaskTooks} className='project__nav-button'>Add task</button>
-                <button onClick={toggleEdit} className='project__nav-button'>Edit</button>
-                <button onClick={toggleRemove} className='project__nav-button'>Delete</button>
-                <button onClick={toggleTools} className='project__nav-button'>Close</button>
+                <button onClick={toggleAddTaskTooks} className='entity__nav-button'>Add task</button>
+                <button onClick={toggleEdit} className='entity__nav-button'>Edit</button>
+                <button onClick={toggleRemove} className='entity__nav-button'>Delete</button>
+                <button onClick={toggleTools} className='entity__nav-button'>Close</button>
               </div>
             }
 
             { addTaskTools &&
               <div className='project__tools'>
                 <Tasks.Create projectId={id} onSuccess={toggleAddTaskTooks} />
-                <button onClick={toggleAddTaskTooks} className='project__nav-button'>Close</button>
-              </div>
-            }
-
-            { editTools &&
-              <div className='project__tools'>
-                <Edit id={id} onSuccess={confirmEdit} />
-                <button onClick={toggleEdit} className='project__nav-button'>Close</button>
+                <button onClick={toggleAddTaskTooks} className='entity__nav-button'>Close</button>
               </div>
             }
 
             { removeTools &&
               <div className='project__tools'>
-                <button onClick={confirmRemove} className='project__nav-button'>Confirm</button>
-                <button onClick={toggleRemove} className='project__nav-button'>Close</button>
+                <button onClick={confirmRemove} className='entity__nav-button'>Confirm</button>
+                <button onClick={toggleRemove} className='entity__nav-button'>Close</button>
               </div>
             }
           </div>

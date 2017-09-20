@@ -1,3 +1,7 @@
+.tasks__list-wrap {
+  padding: 20px 0;
+  min-height: 30px;
+}
 .task__content {
   display: flex;
   justify-content: space-between;
@@ -7,10 +11,32 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .task__nav-button {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 .task__create-form {
   flex: 1;
 }
 .task__title--checked {
   text-decoration: line-through;
+}
+.tasks__list-empty-title {
+  display: block;
+  text-align: center;
+}
+.tasks__item-wrap {
+  margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.task__nav-checkbox {
+  margin: 0 15px 0 0 !important;
 }

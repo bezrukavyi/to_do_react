@@ -1,9 +1,9 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { Router, Route, IndexRoute, Switch } from 'react-router'
+import { Router, Switch } from 'react-router'
 import { ConnectedRouter } from 'react-router-redux'
 
-import { AuthRoute, UnAuthRoute } from 'routes'
+import { AuthRoute, UnAuthRoute, Route } from 'routes'
 import Layouts from 'components/Layouts'
 import Pages from 'components/Pages'
 import * as path from 'routes/path'
@@ -17,7 +17,8 @@ export default ({ store, history }) =>
           <UnAuthRoute path={path.SIGN_UP} component={Pages.SignUp} exact />
           <AuthRoute path={path.DASHBOARD} component={Pages.Dashboard} exact />
 
-          <Route component={() => <h1>404</h1>} />
+          <Route path={path.ERROR_500} component={Pages.Error500} exact />
+          <Route path={path.ERROR_404} component={Pages.Error404} exact />
         </Switch>
       </Layouts.Base>
     </ConnectedRouter>

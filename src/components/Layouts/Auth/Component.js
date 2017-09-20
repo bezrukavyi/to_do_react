@@ -1,11 +1,10 @@
 import React from 'react'
 
-import { Buttons } from 'components'
+import Header from './Header'
 
 const AuthLayout = ({ children, signout }) =>
   <div className='main-container'>
-    <h1>Auth Layout</h1>
-    <Buttons.Simple onClick={signout}>Sign out</Buttons.Simple>
+    <Header onSignout={signout} />
     {children}
   </div>
 

@@ -59,3 +59,28 @@ button {
   width: 115%;
   width: auto;
 }
+
+.entity__nav-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin-right: 10px;
+  &[data-loading] {
+    background: none !important;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    color: color(grey-100);
+  }
+}
+.entity__nav-button--active {
+  text-decoration: underline;
+}
+.entity__tools {
+  .entity__nav-button {
+    margin-right: 0;
+  }
+}

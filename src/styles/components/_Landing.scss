@@ -64,3 +64,8 @@
     color: color(white-100);
   }
 }
+.header__auth {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -64,3 +64,27 @@
     }
   }
 }
+
+.entity__field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .entity__nav-button {
+    margin-right: 10px;
+  }
+
+  .form-group {
+    margin: 0;
+    padding: 0;
+    height: auto;
+  }
+  input {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 14px;
+    height: auto;
+    border-bottom-width: 1px;
+  }
+}
