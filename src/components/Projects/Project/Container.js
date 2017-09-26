@@ -18,8 +18,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  onConfirmRemove: () => dispatchProps.remove(ownProps.id),
-  getTasks: () => dispatchProps.getTasks(ownProps.id),
+  onConfirmRemove: formAdapter(() => dispatchProps.remove(ownProps.id)),
+  getTasks: formAdapter(() => dispatchProps.getTasks(ownProps.id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ProjectItem)
