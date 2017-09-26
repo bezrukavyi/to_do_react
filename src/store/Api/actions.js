@@ -16,7 +16,7 @@ const request = (method, path, action, payload) => (dispatch, getState) => {
     baseURL,
     method,
     url: path,
-    data: snakeCaseKeys(payload.data),
+    data: payload.data,
     params: snakeCaseKeys(payload.params),
     headers
   }

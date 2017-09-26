@@ -20,10 +20,11 @@ const errorsToString = cond([
   [T, pipe(toPairs, chain(([k, vs]) => map((v) => `${capitalize(lowerCase(k))} ${v}`, vs)))]
 ])
 
+export const clearData = (data) => pickBy(data, (value, key) => !isEmpty(value))
+
 const fetchError = (errorReject) =>
   get(errorReject, 'response.data.errors')
   || errorsToString(get(errorReject, 'response.data.errors'))
-  || get(errorReject, 'response.statusText')
   || get(errorReject, 'error.message')
 
 export const formAdapter = (f) => (...args) =>
@@ -39,8 +40,16 @@ export const formAdapter = (f) => (...args) =>
     throw new SubmissionError(error)
   })
 
+export const formDataAdapter = (data = {}, appendData) => {
+  const formData = new FormData()
+  each(clearData(data), (value, key) => formData.append(key, value))
+  each(appendData, (path, key) => get(data, path) && formData.append(key, get(data, path)))
+  return formData
+}
 
 export const map = curry((f, x) => lodashMap(x, f));
+
+export const fileName = (files) => isArray(files) ? join(lodashMap(files, (file) => get(file, 'name')), ', ') : get(files, 'name')
 
 export const createReducer = (iniitialState, defs) => (state = iniitialState, { type, payload }) => {
   const f = defs[type];

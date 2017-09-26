@@ -79,7 +79,8 @@
     padding: 0;
     height: auto;
   }
-  input {
+
+  input, .file-input__field {
     margin: 0;
     padding: 0;
     font-size: 14px;
@@ -87,4 +88,17 @@
     height: auto;
     border-bottom-width: 1px;
   }
+}
+
+.file-input__field {
+  min-height: 20px;
+  min-width: 150px;
+  @extend .input__form;
+  position: relative;
+}
+
+.file-input__placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

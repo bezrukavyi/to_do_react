@@ -33,9 +33,7 @@ class ForManage extends Component {
   }
 
   confirmRemove(values) {
-    if(isFunction(this.props.onConfirmRemove)) {
-      this.props.onConfirmRemove(values).then(() => this.setState({ removeTools: false }))
-    }
+    if(isFunction(this.props.onConfirmRemove)) { this.props.onConfirmRemove(values) }
   }
 
   confirmEdit(values) {
