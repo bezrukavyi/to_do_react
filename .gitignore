@@ -23,3 +23,7 @@ yarn-error.log*
 # styles
 /src/styles/dist
 /src/styles/dist
+
+.ruby-gemset
+.ruby-version
+.env.production
