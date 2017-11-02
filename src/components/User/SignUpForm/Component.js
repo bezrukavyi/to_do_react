@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Alert, Fields, Buttons } from 'components'
 import { Link } from 'react-router-dom'
-import * as path from 'routes/path'
+import * as path from 'constants/Path'
 
 const SignUpForm = ({ handleSubmit, error, submitting }) =>
   <div className='form__auth'>
@@ -28,6 +28,12 @@ const SignUpForm = ({ handleSubmit, error, submitting }) =>
 
         <Buttons.Simple className='btn-link btn-hint' as={Link} to={path.ROOT}>
           sign in
+        </Buttons.Simple>
+
+        <span className='form__hint'></span>
+
+        <Buttons.Simple className='btn-link btn-hint' as={Link} to={path.FORGOT_PASSWORD}>
+          forgot password?
         </Buttons.Simple>
       </div>
     </form>

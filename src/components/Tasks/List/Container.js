@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 
 import { formAdapter } from 'utils'
-import connectWithLifeCycle from 'utils/lifecycle'
+import connectWithLifeCycle from 'lifecycle-connector'
 import Task from 'store/Entities/Task'
 import List from './Component'
 

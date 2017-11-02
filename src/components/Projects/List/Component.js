@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import Project from '../Project'
-import Create from './Create'
+import Create from '../Create'
 
 const List = (props) => {
   const { projectsIds } = props

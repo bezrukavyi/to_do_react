@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { store, history } from 'store'
-import User from 'store/User'
 import App from 'App'
 
 import 'styles/dist/styles/App.css'

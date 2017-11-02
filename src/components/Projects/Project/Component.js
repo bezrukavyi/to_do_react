@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 
 import { Buttons, CustomComponent } from 'components'
-import Edit from './Edit'
+import Edit from '../Edit'
 import Tasks from 'components/Tasks'
 
 class Project extends CustomComponent.ForManage {

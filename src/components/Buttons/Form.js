@@ -9,7 +9,7 @@ const FormButton = ({ className, loading, text, ...rest }) =>
     loading={loading}
     data-style={SLIDE_LEFT}
     data-spinner-size={30}
-    data-spinner-color="#000"
+    data-spinner-color="#ddd"
     data-spinner-lines={12}
     {...rest}
   >

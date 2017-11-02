@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import { isFunction } from 'lodash'
 
 import { Buttons, CustomComponent } from 'components'
-import Edit from './Edit'
+import Edit from '../Edit'
 import Attachments from 'components/Attachments'
 
 class Task extends CustomComponent.ForManage {

@@ -4,20 +4,26 @@ import { replace } from 'react-router-redux'
 
 import { history } from 'store'
 import { signup } from 'store/User/actions'
-import * as path from 'routes/path'
+import * as path from 'constants/Path'
 import SignUpForm from './Component'
 import { formAdapter } from 'utils'
+
+const mapStateToProps = (state, ownProps) => ({
+  form: 'User.SignUpForm',
+})
 
 const mapDispatchToProps = {
   signup,
   onSuccess: () => replace(path.DASHBOARD)
 }
 
-const mergeProps = (_, dispatchProps, ownProps) => ({
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
   ...ownProps,
   onSubmit: formAdapter(data => dispatchProps.signup(data).then(response => dispatchProps.onSuccess()))
 })
 
-const reduxSignUpForm = reduxForm({ form: 'User.SignUpForm' })(SignUpForm)
+const reduxSignUpForm = reduxForm({})(SignUpForm)
 
-export default connect(null, mapDispatchToProps, mergeProps)(reduxSignUpForm)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(reduxSignUpForm)

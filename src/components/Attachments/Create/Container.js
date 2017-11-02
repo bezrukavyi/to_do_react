@@ -2,7 +2,8 @@ import { connect } from 'react-redux'
 import { reduxForm, reset } from 'redux-form'
 import { isFunction } from 'lodash'
 
-import { formAdapter, formDataAdapter } from 'utils'
+import formAdapter from 'utils/formAdapter'
+import formDataAdapter from 'utils/formDataAdapter'
 import Attachment from 'store/Entities/Attachment'
 import Create from './Component'
 
