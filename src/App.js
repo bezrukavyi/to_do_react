@@ -22,8 +22,6 @@ export default ({ store, history }) =>
           <AuthRoute path={Path.RESET_PASSWORD} component={Pages.ResetPassword} onSuccess={User.actions.setResetPasswordToken} />
           <AuthRoute path={Path.UPDATE_PASSWORD} component={Pages.UpdatePassword} />
 
-          <AuthRoute path={Path.DASHBOARD} component={() => <h1>DASHBOARD</h1>} exact />
-
           <Route path={Path.ERROR_500} component={Pages.Error500} />
           <Route path='*' component={Pages.Error404} />
         </Switch>
