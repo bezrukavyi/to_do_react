@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const common = require('./webpack.config.common.js')
+var Dotenv = require('dotenv-webpack')
 
 module.exports = merge(common, {
   devtool: 'cheap-eval-source-map',
@@ -46,6 +47,10 @@ module.exports = merge(common, {
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
       }
+    }),
+    new Dotenv({
+      path: '.env',
+      systemvars: true
     })
   ]
 })

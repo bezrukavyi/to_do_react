@@ -41,6 +41,7 @@
     "clean-webpack-plugin": "^0.1.16",
     "cross-env": "^5.1.0",
     "css-loader": "^0.28.7",
+    "dotenv-webpack": "^1.5.4",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-15": "^1.0.5",
     "enzyme-to-json": "^3.3.0",
