@@ -20,7 +20,7 @@ const SignUpForm = ({ handleSubmit, error, submitting }) =>
       }
 
       <div className='form__submit'>
-        <Buttons.Form className='black__theme' type='submit' loading={submitting} text='Login' />
+        {/* <Buttons.Form className='black__theme' type='submit' loading={submitting} text='Login' /> */}
 
         <span className='form__hint'>
           or

@@ -20,7 +20,7 @@ const request = (method, path, action, payload) => (dispatch, getState) => {
     params: snakeCaseKeys(payload.params),
     headers
   }
-
+  
   return axios.request(config)
     .then((response) => {
       dispatch({
