@@ -11,7 +11,7 @@ module.exports = {
   ],
   setupTestFrameworkScriptFile: "<rootDir>/test/support/enzym.js",
   setupFiles: [
-    "<rootDir>/test/support/global.js",
+    "<rootDir>/test/support/setup.js"
   ],
   testRegex: "(/test/.*|\\.(test|spec))\\.(js|jsx|json)$",
   moduleFileExtensions: [

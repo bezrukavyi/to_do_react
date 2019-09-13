@@ -1,4 +1,4 @@
-import { normalize } from 'normalize-json-api'
+import normalize from 'utils/normalizer'
 import { transform, pickBy, keys, forIn, filter, uniq, isEmpty } from 'lodash'
 import dotProp from 'dot-prop-immutable'
 

@@ -27,3 +27,6 @@ yarn-error.log*
 .ruby-gemset
 .ruby-version
 .env.production
+
+# jest
+*.snap
